@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card-body">
+    <h4>Pricing Config List</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Active</th>
+                <th scope="col">Name</th>
+                <th scope="col">DBA(Tue, Wed, Thur)</th>
+                <th scope="col">DBA(Sat, Mon)</th>
+                <th scope="col">DBA(Sun)</th>
+                <th scope="col">Distance Add (upto 3km)</th>
+                <th scope="col">Distance Add (after 3km)</th>
+                <th scope="col">TMF (upto 1hr)</th>
+                <th scope="col">TMF (upto 2hrs)</th>
+                <th scope="col">TMF (upto 3hrs)</th>
+                <th scope="col">Waiting Charges (upto 3mins)</th>
+                <th scope="col">Waiting Charges (after 3mins)</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.active }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.distance_base_tier1 }}</td>
+                <td>{{ item.distance_base_tier2 }}</td>
+                <td>{{ item.distance_base_tier3 }}</td>
+                <td>{{ item.distance_add_tier1 }}</td>
+                <td>{{ item.distance_add_tier2 }}</td>
+                <td>{{ item.tmf_tier1 }}</td>
+                <td>{{ item.tmf_tier2 }}</td>
+                <td>{{ item.tmf_tier3 }}</td>
+                <td>{{ item.wc_tier1 }}</td>
+                <td>{{ item.wc_tier2 }}</td>
+                <td>{{ item.created_at }}</td>
+                <td>{{ item.created_by }}</td>
+                <td><a type="button" class="btn btn-warning" href="/pricing-update/{{ item.id }}">Update</a>
+                    <a type="button" class="btn btn-danger" href="/pricing-delete/{{ item.id }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-success" href="{%url 'pricing-create' %}">Create</a>
+    <a type="button" class="btn btn-success" href="{%url 'export-csv' %}">Export CSV</a>
+</div>
+{% endblock %}
